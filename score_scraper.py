@@ -1,14 +1,14 @@
 from bs4 import BeautifulSoup
 import csv
 from html.parser import HTMLParser
+import os
 
 def makeReadable(soup, newFilename):
     newFile = open(newFilename, "w+")
     newFile.write(soup.prettify())
     return newFile
 
-
-file = open('scream.htm', "r+")
+file = open('original.htm', "r+")
 soup = BeautifulSoup(file.read(), "html.parser")
 #file = makeReadable(soup, "updated.htm")
 
@@ -26,17 +26,16 @@ scores = scores[2]("tbody")
 numRows = 0
 
 # TODO Fix printing day 1 and day 2
+csvwriter.writerow(divisionQueue.pop(0)) # print Level
 for data in scores:
-    csvwriter.writerow(divisionQueue.pop(0))
+    if data.previous.previous == "Day 2": # close, perhaps check previous elements for patterns
+        csvwriter.writerow(divisionQueue.pop(0))
     for row in data.contents[numRows:]:
         fields = []
         for field in row.contents:
             fields.append(field.text)
         csvwriter.writerow(fields)
-        currentDay += 1
         if(numRows == 0):
-            csvwriter.writerow(divisionQueue.pop(0))
-            currentDay -= 1
             numRows += 1
         
    
