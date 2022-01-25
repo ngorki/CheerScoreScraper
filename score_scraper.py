@@ -26,9 +26,9 @@ scores = scores[2]("tbody")
 numRows = 0
 
 # TODO Fix printing day 1 and day 2
-csvwriter.writerow(divisionQueue.pop(0)) # print Level
+csvwriter.writerow(divisionQueue.pop(0))
 for data in scores:
-    if data.previous.previous == "Day 2": # close, perhaps check previous elements for patterns
+    if data.previous.previous == "Day 2" or not "Day" in data.previous.previous: # close, perhaps check previous elements for patterns
         csvwriter.writerow(divisionQueue.pop(0))
     for row in data.contents[numRows:]:
         fields = []
