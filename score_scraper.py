@@ -47,6 +47,7 @@ csvfile = open("scores.csv", "w")
 csvwriter = csv.writer(csvfile)
 csvInit = True
 
+<<<<<<< HEAD
 for newUrl in newUrls:
     response = requests.get(newUrl)
     soup = BeautifulSoup(response.text, "html.parser")
